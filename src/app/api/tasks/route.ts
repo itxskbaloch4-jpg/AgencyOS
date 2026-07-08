@@ -6,6 +6,11 @@ export async function GET(req: Request) {
   const projectId = searchParams.get("projectId");
   const supabase = createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   let query = supabase.from("tasks").select("*");
   if (projectId) query = query.eq("projectId", projectId);
 
@@ -16,6 +21,12 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const body = await req.json();
   const { data, error } = await supabase.from("tasks").insert(body).select();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
