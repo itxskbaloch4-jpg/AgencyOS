@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, CheckSquare, FileText, MessageSquare, Receipt, Calendar, Users, Settings } from "lucide-react";
+import { LayoutDashboard, FolderKanban, CheckSquare, FileText, MessageSquare, Receipt, Calendar, Users, Settings, Bell, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -14,6 +14,8 @@ const links = [
   { href: "/dashboard/client/invoices", label: "Invoices", icon: Receipt },
   { href: "/dashboard/client/calendar", label: "Calendar", icon: Calendar },
   { href: "/dashboard/client/team", label: "Team", icon: Users },
+  { href: "/dashboard/client/notifications", label: "Notifications", icon: Bell },
+  { href: "/dashboard/client/profile", label: "Profile", icon: User },
   { href: "/dashboard/client/settings", label: "Settings", icon: Settings },
 ];
 
