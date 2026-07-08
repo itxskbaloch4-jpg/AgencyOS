@@ -2,10 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, CheckSquare, FileText, MessageSquare, Receipt, Calendar, Users, Settings, Bell, User } from "lucide-react";
+import {
+  LayoutDashboard,
+  FolderKanban,
+  CheckSquare,
+  FileText,
+  MessageSquare,
+  Receipt,
+  Calendar,
+  Users,
+  Settings,
+  Bell,
+  User,
+  Building2,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const links = [
+const clientLinks = [
   { href: "/dashboard/client", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/client/projects", label: "Projects", icon: FolderKanban },
   { href: "/dashboard/client/tasks", label: "Tasks", icon: CheckSquare },
@@ -19,8 +32,19 @@ const links = [
   { href: "/dashboard/client/settings", label: "Settings", icon: Settings },
 ];
 
+const adminLinks = [
+  { href: "/dashboard/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard/admin/clients", label: "Clients", icon: Building2 },
+  { href: "/dashboard/admin/projects", label: "Projects", icon: FolderKanban },
+  { href: "/dashboard/admin/invoices", label: "Invoices", icon: Receipt },
+  { href: "/dashboard/admin/settings", label: "Settings", icon: Settings },
+];
+
 export function Sidebar() {
   const pathname = usePathname();
+  const isAdmin = pathname?.startsWith("/dashboard/admin");
+  const links = isAdmin ? adminLinks : clientLinks;
+
   return (
     <aside className="hidden md:flex flex-col w-64 border-r border-gray-200 dark:border-gray-800 min-h-screen p-4">
       <h1 className="text-xl font-bold px-2 mb-6 text-brand-600">AgencyOS</h1>
