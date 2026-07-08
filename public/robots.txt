@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+
+Sitemap: https://agencyos.vercel.app/sitemap.xml
