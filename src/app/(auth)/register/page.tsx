@@ -10,14 +10,18 @@ export default function RegisterPage() {
   const supabase = createClient();
 
   async function handleRegister(e: React.FormEvent) {
-    e.preventDefault();
-    const { error } = await supabase.auth.signUp({
-      email: form.email,
-      password: form.password,
-      options: { data: { full_name: form.name, role: "client" } },
-    });
-    setMessage(error ? error.message : "Check your email to confirm your account.");
-  }
+  e.preventDefault();
+  const supabase = createClient();
+  const { error } = await supabase.auth.signUp({
+    email: form.email,
+    password: form.password,
+    options: {
+      data: { full_name: form.name, role: "client" },
+      emailRedirectTo: `${window.location.origin}/auth/callback`,
+    },
+  });
+  setMessage(error ? error.message : "Check your email to confirm your account.");
+}
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
